@@ -1,7 +1,12 @@
 // adapted from OOB "Create a Software Normalization" business rule
 
 function insertRecord() {
-	// do not create discovery models for "Security Update" installations
+    var grInstalls = new GlideRecord('cmdb_sam_sw_install');
+	// Find all Software Install records created by SCCM, JAMF, or ILMT
+	grInstalls.addEncodedQuery('discovery_source=SG-TaniumSN^discovery_model=NULL');
+	grInstalls.query();
+    
+    // do not create discovery models for "Security Update" installations
 	var matchString = 'security update';
 	var installationName = current.primary_key;
 	if (installationName.toLowerCase().indexOf(matchString) > -1) {

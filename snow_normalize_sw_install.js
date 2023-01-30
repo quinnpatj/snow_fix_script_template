@@ -78,5 +78,6 @@ grInstalls.setLimit(10);
 grInstalls.query();
 
 while (grInstalls.next()) {
+	gs.info('Normalizing software install: "' + grInstalls.display_name + '" installed on: ' + grInstalls.installed_on.name);
     insertRecord();
 }

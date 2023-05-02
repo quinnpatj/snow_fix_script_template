@@ -1,5 +1,5 @@
-var ID = ['04b7bdc3978a61103a3c36121153af6a']; //sys_id of the change record
-var newCI = ['Benefits AWS Services'];
+var ID = ['04b7bdc3978a61103a3c36121153af6a']; // sys_id of the change record
+var newCI = ['Benefits AWS Services']; // New CI name to be added to change record
 
 for (var i = 0; i < ID.length; i++) {
 			
@@ -12,10 +12,8 @@ for (var i = 0; i < ID.length; i++) {
     // Bypass business rules and workflows
     //chg.setWorkflow(false);
 
-    // 
+    // Update CI and print log showing new and previous values
     chg.cmdb_ci = newCI;
-    //chg.assignment_group = assignGroup;
-    //chg.assigned_to = assignedTo;
 
         gs.log("Configuration Item Updated for " + chg.number.getDisplayValue() + '\n' +
             "Previous Value: " + oldCI + '\n' +

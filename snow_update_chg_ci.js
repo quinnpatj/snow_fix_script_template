@@ -1,3 +1,44 @@
+/* JOEL PROD VERSION:
+
+    
+Fix Script for Reassociating CI to Closed Change Request
+
+PROD 
+CHG0217181 6f9eac5787b9ed108df97488dabb3514
+CHG0220692 04b7bdc3978a61103a3c36121153af6a
+Benefits AWS Services c0fec4d5dbb35c14e287aa82ca961993
+
+    var changeRecordsSysId = ['6f9eac5787b9ed108df97488dabb3514','04b7bdc3978a61103a3c36121153af6a']; 
+
+    var updateCISysId = 'c0fec4d5dbb35c14e287aa82ca961993';
+
+    for (var i in changeRecordsSysId) {
+        var grChgStatetoNew = new GlideRecord('change_request');
+        grChgStatetoNew.addEncodedQuery('sys_id='+ changeRecordsSysId[i]);
+        grChgStatetoNew.query();
+        if(grChgStatetoNew.next()){
+            grChgStatetoNew.state = -5;
+            grChgStatetoNew.setWorkflow(false);
+            grChgStatetoNew.update();
+        }
+    var grUpdateCIRecord = new GlideRecord('change_request');
+        grUpdateCIRecord.addEncodedQuery('sys_id='+ changeRecordsSysId[i]);
+        grUpdateCIRecord.query();
+        if(grUpdateCIRecord.next()){
+            grUpdateCIRecord.cmdb_ci = updateCISysId;
+            grUpdateCIRecord.update();
+        }
+    var grChgStatetoClosed = new GlideRecord('change_request');
+            grChgStatetoClosed.addEncodedQuery('sys_id='+ changeRecordsSysId[i]);
+            grChgStatetoClosed.query();
+        if(grChgStatetoClosed.next()){
+            grChgStatetoClosed.state = 3;
+            grChgStatetoClosed.setWorkflow(false);
+            grChgStatetoClosed.update();
+        }
+    }
+*/
+
 var ID = ['04b7bdc3978a61103a3c36121153af6a']; // sys_id of the change record
 var newBS = 'c0fec4d5dbb35c14e287aa82ca961993'; // sys_id of the business service to be added to change record
 var newCI = 'c0fec4d5dbb35c14e287aa82ca961993'; // sys_id of the CI to be added to change record

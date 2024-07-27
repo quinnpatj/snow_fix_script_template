@@ -2,6 +2,7 @@ updateField();
 
 function updateField(){
     var gr = new GlideRecord('sys_user_preference');
+	gr.addEncodedQuery('name=rowcount^value=100^ORvalue=50');
     //gr.setLimit(10);
     gr.query();
 
